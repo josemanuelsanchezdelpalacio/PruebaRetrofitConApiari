@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Proyecto(
-    val nombre: String,
+    val proyecto: String,
     val centro: String,
     val responsable: String
 )

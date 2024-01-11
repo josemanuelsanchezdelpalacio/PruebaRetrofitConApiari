@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import com.dam2jms.pruebaretrofitconapiari.data.RetrofitServiceFactory
 import com.dam2jms.pruebaretrofitconapiari.ui.theme.PruebaRetrofitConApiariTheme
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -33,14 +34,22 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
 
-@Composable
-fun ProbandoBodyContent(){
-    val service = RetrofitServiceFactory.makeRetrofitService()
-    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-        Button(onClick = { service.getProyectos() }) {
-            Text(text = "Buscar")
+    @Composable
+    fun ProbandoBodyContent() {
+        val service = RetrofitServiceFactory.makeRetrofitService()
+        Column (modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center) {
+            Button(onClick = {
+                lifecycleScope.launch {
+                    val listProjects = service.listData()
+                    println(listProjects.get(0).responsable)
+                }
+
+            }) {
+                Text(text = "Buscar")
+            }
         }
     }
 }

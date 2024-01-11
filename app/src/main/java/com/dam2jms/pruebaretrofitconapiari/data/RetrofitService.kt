@@ -9,63 +9,15 @@ import retrofit2.http.GET
 
 interface RetrofitService {
     @GET("proyectos")
-    suspend fun getProyectos(): List<Proyecto>
+    suspend fun listData(): List<Proyecto>
 }
 
 object RetrofitServiceFactory {
     fun makeRetrofitService(): RetrofitService {
         return Retrofit
             .Builder()
-            .baseUrl("https://private-a3a699-probandoretrofitapiary.apiary-mock.com/")
+            .baseUrl("https://private-f73aae-jmsdam2.apiary-mock.com/")
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build().create(RetrofitService::class.java)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*class CreditCardRepository {
-    private val creditCardService = RetrofitInstance.creditCardService
-
-    suspend fun getCreditCards(): List<Proyecto> {
-        return creditCardService.getProyectos()
-    }
-}
-
-class CreditCardViewModel : ViewModel() {
-    private val repository = CreditCardRepository()
-
-    private val _creditCards = MutableLiveData<List<Proyecto>>()
-    val creditCards: LiveData<List<Proyecto>> = _creditCards
-
-    fun fetchCreditCards() {
-        viewModelScope.launch {
-            try {
-                val cards = repository.getCreditCards()
-                _creditCards.value = cards
-            } catch (e: Exception) {
-                // Handle error
-            }
-        }
-    }
-}*/
